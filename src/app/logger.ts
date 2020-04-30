@@ -2,11 +2,9 @@ import winston from 'winston';
 import config from '../config';
 
 const transports = [];
-if(config.env !== 'development') {
-  transports.push(
-    new winston.transports.Console()
-  )
-} else {
+
+if (config.env === 'development') {
+
   transports.push(
     new winston.transports.Console({
       format: winston.format.combine(
@@ -15,6 +13,11 @@ if(config.env !== 'development') {
       )
     })
   )
+
+} else {
+
+  transports.push(new winston.transports.Console())
+
 }
 
 const LoggerInstance = winston.createLogger({

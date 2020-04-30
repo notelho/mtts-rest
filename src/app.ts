@@ -1,9 +1,10 @@
 import express from 'express';
-import config from './config';
-import loader from './loaders';
-import Logger from './loaders/logger';
+import config from './app/configuration';
+import loader from './app/loader';
+import Logger from './app/logger';
 
 const startServer = (): void => {
+
   const app = express();
 
   loader(app);

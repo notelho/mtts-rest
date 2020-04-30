@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-export default {
+export const errors = {
 
     handler: (err: any, req: Request, res: Response, next: NextFunction) => {
 
@@ -23,6 +23,18 @@ export default {
                 message: err.message,
             },
         });
+    },
+
+    notfound: (req: Request, res: Response, next: NextFunction) => {
+
+        const err: any = new Error('Not Found');
+
+        err['status'] = 404;
+
+        next(err);
+
     }
 
 }
+
+export default errors;

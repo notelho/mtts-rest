@@ -1,7 +1,7 @@
 {
   "name": "mtts-rest",
   "version": "1.0.0",
-  "description": "My node/ts rest api template 🖥️",
+  "description": "My node/ts rest api template",
   "main": "index.js",
   "scripts": {
     "build": "npm run build:transpile && npm run build:minify",
@@ -13,17 +13,14 @@
   },
   "keywords": [],
   "author": "",
-  "license": "MIT",
+  "license": "ISC",
   "dependencies": {
-    "@types/mysql": "^2.15.8",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "gulp": "^4.0.2",
     "gulp-uglify": "^3.0.2",
-    "jsonwebtoken": "^8.5.1",
-    "mysql": "^2.17.1",
     "pm2": "^4.1.2",
     "require-dir": "^1.2.0",
     "uglify-es": "^3.3.9",

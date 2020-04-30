@@ -7,5 +7,5 @@ module.exports = {
     autorestart: true,
     watch: true,
     max_memory_restart: '1G',
-  }],
+  }]
 };

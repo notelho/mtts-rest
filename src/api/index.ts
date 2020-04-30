@@ -1,24 +1,20 @@
 import requireDir from 'require-dir';
+import * as express from 'express';
+import * as path from 'path';
 
-import { Router } from 'express';
-import { join } from 'path';
+export function index() {
 
-/**
- * This function allows us to require all routes inside routes/ path dynamically
- */
-const routes = () => {
-  const routesFn = requireDir(join(__dirname, './routes'));
-  const routes = Object.keys(routesFn).map(key => routesFn[key]);
+  const app = express.Router();
+  const routePath = path.join(__dirname, './routes');
+  const routeDirectory = requireDir(routePath);
+  const routeKeys = Object.keys(routeDirectory);
+  const routes = routeKeys.map(key => routeDirectory[key]);
 
-  return routes;
-};
-
-export default () => {
-  const app = Router();
-
-  console.log(routes());
-  
-  routes().forEach(route => route.default(app));
+  routes.forEach(route => {
+    route.default(app);
+  });
 
   return app;
 }
+
+export default index;
