@@ -1,27 +1,27 @@
 import express from 'express';
+import Environment from './api/app/environment';
+import Configurator from './api/app/configurator';
 
+export class App {
 
+    private _app: express.Application;
 
-const serve = (): void => {
-
-  const app = express();
-
-  configurate(app);
-
-  app.listen(config.port, err => {
-
-    if (err) {
-      Logger.error(err);
-      process.exit(1);
-      return;
+    constructor() {
+        this._app = express();
     }
 
-    Logger.info(`
-      ################################################
-      🛡️  Server listening on port: ${config.port} 🛡️ 
-      ################################################
-    `);
-  });
-};
+    public start() {
 
-serve();
+        const app = this._app;
+        const port = Environment.api.port;
+        const prefix = Environment.api.prefix;
+
+        Configurator.run(app, prefix);
+        Configurator.listen(app, port);
+
+        return this;
+    }
+
+}
+
+const app = new App().start();

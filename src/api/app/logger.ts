@@ -3,24 +3,24 @@ import Environment from './environment';
 
 export namespace Logger {
 
-  export function info(message: any) {
-    Instance.info(message);
+  export function info(msg: any): void {
+    Instance.info(msg);
   }
 
-  export function debug(message: any) {
-    Instance.debug(message);
+  export function debug(msg: any): void {
+    Instance.debug(msg);
   }
 
-  export function warn(message: any) {
-    Instance.warn(message);
+  export function warn(msg: any): void {
+    Instance.warn(msg);
   }
 
-  export function error(message: any) {
-    Instance.error(message);
+  export function error(msg: any): void {
+    Instance.error(msg);
   }
 
-  export function log(message: any) {
-    Instance.log(message);
+  export function log(msg: any): void {
+    Instance.silly(msg);
   }
 
   export type LoggerType = 'info' | 'debug' | 'warn' | 'error' | 'log';

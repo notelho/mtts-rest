@@ -1,22 +1,28 @@
 import requireDir from 'require-dir';
+import express from 'express';
+import path from 'path';
 
-import * as express from 'express';
-import * as path from 'path';
+export namespace Router {
 
-export function router() {
+    export const routingPath = path.join(__dirname, '../routes');
 
-    const router = express.Router();
+    export const routingDirectory = requireDir(routingPath);
 
-    const routePath = path.join(__dirname, '../routes');
-    const routeDirectory = requireDir(routePath);
-    const routeKeys = Object.keys(routeDirectory);
-    const routes = routeKeys.map(key => routeDirectory[key]);
+    export const routingNames = Object.keys(routingDirectory);
 
-    routes.forEach(route => {
-        route.default(router);
-    });
+    export function router() {
 
-    return router;
+        const router = express.Router();
+
+        const routes = routingNames.map(key => routingDirectory[key]);
+
+        routes.forEach(route => {
+            route.default(router);
+        });
+
+        return router;
+    }
+
 }
 
-export default router;
+export default Router; 
