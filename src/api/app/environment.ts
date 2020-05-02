@@ -2,18 +2,30 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-export const environment = {
+export namespace Environment {
 
-  port: process.env.PORT ? parseInt(process.env.PORT) : 3000,
+  export const env = process.env.NODE_ENV || 'development';
 
-  env: process.env.NODE_ENV || 'development',
+  export const jwt = {
 
-  jwtSecret: process.env.JWT_SECRET || 'potato',
+    secret: process.env.JWT_SECRET || 'potato'
 
-  logs: { level: process.env.LOG_LEVEL || 'silly', },
+  };
 
-  api: { prefix: '/api', },
+  export const log = {
 
-};
+    level: process.env.LOG_LEVEL || 'silly'
 
-export default environment;
+  };
+
+  export const api = {
+
+    prefix: process.env.API_PREFIX || '/api',
+
+    port: process.env.API_PORT ? parseInt(process.env.API_PORT) : 3000
+
+  };
+
+}
+
+export default Environment;
