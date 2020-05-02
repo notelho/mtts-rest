@@ -1,15 +1,15 @@
 import express from 'express';
-import config from './app/configuration';
-import loader from './app/loader';
-import Logger from './app/logger';
 
-const startServer = (): void => {
+
+
+const serve = (): void => {
 
   const app = express();
 
-  loader(app);
+  configurate(app);
 
   app.listen(config.port, err => {
+
     if (err) {
       Logger.error(err);
       process.exit(1);
@@ -24,4 +24,4 @@ const startServer = (): void => {
   });
 };
 
-startServer();
+serve();

@@ -4,16 +4,16 @@
   "description": "My node/ts rest api template",
   "main": "index.js",
   "scripts": {
+    "start": "npm run build && npx pm2 start ecosystem.config.js",
+    "stop": "npx pm2 stop app",
     "build": "npm run build:transpile && npm run build:minify",
     "build:minify": "gulp minify",
     "build:transpile": "npx tsc",
-    "logs": "npx pm2 log",
-    "start": "npm run build && npx pm2 start ecosystem.config.js",
-    "stop": "npx pm2 stop app"
+    "logs": "npx pm2 log"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",

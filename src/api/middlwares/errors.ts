@@ -15,24 +15,16 @@ export const errors = {
     },
 
     default: (err: any, req: Request, res: Response, next: NextFunction) => {
-
         res.status(err.status || 500);
-
-        res.json({
-            errors: {
-                message: err.message,
-            },
-        });
+        res.json({ errors: { message: err.message } });
     },
 
     notfound: (req: Request, res: Response, next: NextFunction) => {
-
-        const err: any = new Error('Not Found');
-
-        err['status'] = 404;
-
-        next(err);
-
+        const error: any = new Error();
+        error['message'] = 'Not Found';
+        error['name'] = 'Not Found';
+        error['status'] = 404;
+        next(error);
     }
 
 }

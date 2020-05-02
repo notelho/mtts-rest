@@ -1,7 +1,7 @@
-import { Application, Router, Request, Response } from 'express';
+import { Router, Request, Response } from 'express';
 import StatusService from '../../services/status.service';
 
-export function route(app: Application) {
+export function route(globalRouter: Router) {
 
     const status = new StatusService();
     const router = Router();
@@ -18,7 +18,7 @@ export function route(app: Application) {
         res.json({ ok: status.ok, error: status.error }).status(200).end();
     });
 
-    app.use('/status', router);
+    globalRouter.use('/status', router);
 
 }
 
