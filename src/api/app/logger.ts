@@ -1,33 +1,57 @@
 import winston from 'winston';
-import environment from './environment';
+import Environment from './environment';
 
-function createLogger() {
+export namespace Logger {
 
-  const formater = winston.format.combine(winston.format.cli(), winston.format.splat());
+  export function info(message: any) {
+    Instance.info(message);
+  }
 
-  const devConsole = new winston.transports.Console({ format: formater });
-  const prodConsole = new winston.transports.Console();
+  export function debug(message: any) {
+    Instance.debug(message);
+  }
 
-  return winston.createLogger({
+  export function warn(message: any) {
+    Instance.warn(message);
+  }
 
-    level: environment.logs.level,
-    levels: winston.config.npm.levels,
+  export function error(message: any) {
+    Instance.error(message);
+  }
 
-    transports: environment.env === 'development' ?
-      [devConsole] :
-      [prodConsole],
+  export function log(message: any) {
+    Instance.log(message);
+  }
 
-    format: winston.format.combine(
-      winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-      winston.format.errors({ stack: true }),
-      winston.format.splat(),
-      winston.format.json()
-    ),
+  export type LoggerType = 'info' | 'debug' | 'warn' | 'error' | 'log';
 
-  });
+  export const Instance = (function () {
+
+    const formater = winston.format.combine(winston.format.cli(), winston.format.splat());
+
+    const devConsole = new winston.transports.Console({ format: formater });
+    const prodConsole = new winston.transports.Console();
+
+    return winston.createLogger({
+
+      level: Environment.log.level,
+      levels: winston.config.npm.levels,
+
+      transports: Environment.env === 'development' ?
+        [devConsole] :
+        [prodConsole],
+
+      format: winston.format.combine(
+        winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+        winston.format.errors({ stack: true }),
+        winston.format.splat(),
+        winston.format.json()
+      ),
+
+    });
+
+  })();
 
 }
 
-const logger = createLogger();
-
-export default logger;
+export default Logger;
