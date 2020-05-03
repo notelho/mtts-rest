@@ -9,7 +9,8 @@
     "build": "npm run build:transpile && npm run build:minify",
     "build:minify": "gulp minify",
     "build:transpile": "npx tsc",
-    "logs": "npx pm2 log"
+    "logs": "npx pm2 log",
+    "clear": "npx pm2 flush mtts-rest"
   },
   "keywords": [],
   "author": "",

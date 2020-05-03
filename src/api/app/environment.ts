@@ -6,17 +6,9 @@ export namespace Environment {
 
   export const env = process.env.NODE_ENV || 'development';
 
-  export const jwt = {
+  export const jwt = { secret: process.env.JWT_SECRET || 'supersecretapikey' };
 
-    secret: process.env.JWT_SECRET || 'supersecretapikey'
-
-  };
-
-  export const log = {
-
-    level: process.env.LOG_LEVEL || 'silly'
-
-  };
+  export const log = { level: process.env.LOG_LEVEL || 'silly' };
 
   export const api = {
 
