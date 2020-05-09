@@ -16,7 +16,6 @@ export function route(router: Router): void {
     });
 
     local.all('/info', async (req: Request, res: Response) => {
-        Logger.info('info')
         res.json({ ok: status.ok, error: status.error }).status(200).end();
     });
 

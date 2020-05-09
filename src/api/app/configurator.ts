@@ -14,7 +14,7 @@ export namespace Configurator {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
 
-    app.use(express.static('public'));
+    app.use(express.static('src/public'));
 
     app.use(prefix, Router.router());
 

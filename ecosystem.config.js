@@ -2,7 +2,7 @@ module.exports = {
   apps: [{
     name: 'mtts-rest',
     script: './dist/app.js',
-    exec_mode: 'cluster',
+    // exec_mode: 'cluster',
     instances: 1,
     autorestart: true,
     watch: true,
