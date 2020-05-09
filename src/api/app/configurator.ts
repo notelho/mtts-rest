@@ -14,23 +14,15 @@ export namespace Configurator {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
 
-    app.use(express.static('src/public'));
+    // app.use(express.static('src/public'));
+    // app.use(express.static('src/public'));
+    // app.use(express.static('src/public'));
 
     app.use(prefix, Router.router());
 
-    app.use(function (err: any, req: any, res: any, next: any) {
-
-      Logger.info(err)
-      Logger.info('houasffjoiafiaof')
-
-      res.status(400).send(err.message)
-
-    })
-
-
     app.use(middlwares.handler);
-    // app.use(middlwares.notFound);
-    // app.use(errors.default);
+    app.use(middlwares.notFound);
+    app.use(middlwares.thrower);
 
   }
 
