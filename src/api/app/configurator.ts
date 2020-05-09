@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import Logger from './logger';
 import Router from './router';
-// import errors from '../middlwares/errors';
+import * as middlwares from '../middlwares';
 
 export namespace Configurator {
 
@@ -18,8 +18,18 @@ export namespace Configurator {
 
     app.use(prefix, Router.router());
 
-    // app.use(errors.notfound);
-    // app.use(errors.handler);
+    app.use(function (err: any, req: any, res: any, next: any) {
+
+      Logger.info(err)
+      Logger.info('houasffjoiafiaof')
+
+      res.status(400).send(err.message)
+
+    })
+
+
+    app.use(middlwares.handler);
+    // app.use(middlwares.notFound);
     // app.use(errors.default);
 
   }

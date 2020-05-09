@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
 import StatusService from '../../services/status.service';
+import Logger from '../app/logger';
 
 export function route(router: Router): void {
 
@@ -15,6 +16,7 @@ export function route(router: Router): void {
     });
 
     local.all('/info', async (req: Request, res: Response) => {
+        Logger.info('info')
         res.json({ ok: status.ok, error: status.error }).status(200).end();
     });
 
