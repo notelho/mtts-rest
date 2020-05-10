@@ -1,0 +1,5 @@
+{
+    "*.ts": [
+        "npx tslint -c tslint.json 'src/**/*.ts'"
+    ]
+}
