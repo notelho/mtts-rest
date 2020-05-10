@@ -18,7 +18,7 @@ export namespace Environment {
 
     export const api = {
 
-        port: process.env.API_PORT ? parseInt(process.env.API_PORT) : 3000,
+        port: process.env.API_PORT ? parseInt(process.env.API_PORT, 10) : 3000,
 
         prefix: process.env.API_PREFIX || '/api',
 
