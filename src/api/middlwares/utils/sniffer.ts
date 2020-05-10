@@ -1,36 +1,40 @@
-// const requestStart = Date.now();
+import { Request, Response, NextFunction } from 'express';
+import Environment from '../../app/environment';
+import Logger from '../../app/logger';
 
-//   let errorMessage = null;
-//   let body = [];
-//   request.on("data", chunk => {
-//     body.push(chunk);
-//   });
-//   request.on("end", () => {
-//     body = Buffer.concat(body);
-//     body = body.toString();
-//   });
-//   request.on("error", error => {
-//     errorMessage = error.message;
-//   });
+export function sniffer(req: Request, res: Response, next: NextFunction): void {
 
-//   response.on("finish", () => {
-//     const { rawHeaders, httpVersion, method, socket, url } = request;
-//     const { remoteAddress, remoteFamily } = socket;
+    if (Environment.log.request) {
 
-//     console.log(
-//       JSON.stringify({
-//         timestamp: Date.now(),
-//         processingTime: Date.now() - requestStart,
-//         rawHeaders,
-//         body,
-//         errorMessage,
-//         httpVersion,
-//         method,
-//         remoteAddress,
-//         remoteFamily,
-//         url
-//       })
-//     );
-//   });
+        const requestStart = Date.now();
 
-//   process(request, response);
+        Logger.info(`# body: ${JSON.stringify(req.body)}`);
+        Logger.info(`# query: ${JSON.stringify(req.query)}`);
+        Logger.info(`# params: ${JSON.stringify(req.params)}`);
+
+        res.on("error", error => Logger.error(error));
+
+        res.on("data", () => {
+            Logger.log({
+                address: req.socket.remoteAddress,
+                family: req.socket.remoteFamily,
+                headers: req.rawHeaders,
+                version: req.httpVersion,
+                method: req.method,
+                url: req.url,
+            });
+        });
+
+        res.on("finish", () => {
+            const requestEnd = Date.now();
+            const processingTime = requestEnd - requestStart;
+            Logger.log({ requestStart, requestEnd, processingTime });
+        });
+
+    }
+
+    next();
+
+}
+
+export default sniffer;
