@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import Logger from './logger';
 import Router from './router';
-import * as middlwares from '../middlwares';
+import * as middlewares from '../middlewares';
 
 export namespace Configurator {
 
@@ -14,15 +14,15 @@ export namespace Configurator {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
 
-    app.use(middlwares.sniffer);
+    app.use(middlewares.sniffer);
 
     app.use('/public', express.static('src/public'));
 
     app.use(prefix, Router.router());
 
-    app.use(middlwares.handler);
-    app.use(middlwares.notFound);
-    app.use(middlwares.thrower);
+    app.use(middlewares.handler);
+    app.use(middlewares.notFound);
+    app.use(middlewares.thrower);
 
   }
 
