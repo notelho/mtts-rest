@@ -14,7 +14,7 @@ export function authenticator(req: Request, res: Response, next: NextFunction): 
 
     const authenticator = new Authenticator(bearer);
 
-    if (authenticator.valid) {
+    if (!authenticator.valid) {
 
       throw new Error('Invalid user provided');
 

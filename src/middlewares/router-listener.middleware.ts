@@ -14,21 +14,22 @@ export function routerListener(req: Request, res: Response, next: NextFunction):
 
         res.on("error", error => logger.error(error));
 
-        res.on("data", () => {
-            logger.log({
-                address: req.socket.remoteAddress,
-                family: req.socket.remoteFamily,
-                headers: req.rawHeaders,
-                version: req.httpVersion,
-                method: req.method,
-                url: req.url,
-            });
-        });
-
         res.on("finish", () => {
+
             const requestEnd = Date.now();
             const processingTime = requestEnd - requestStart;
+
             logger.log({ requestStart, requestEnd, processingTime });
+
+            // logger.log({
+            //     address: req.socket.remoteAddress,
+            //     family: req.socket.remoteFamily,
+            //     headers: req.rawHeaders,
+            //     version: req.httpVersion,
+            //     method: req.method,
+            //     url: req.url,
+            // });
+
         });
 
     }
