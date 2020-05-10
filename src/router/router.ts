@@ -4,7 +4,7 @@ import path from 'path';
 
 export namespace Router {
 
-    export const routingPath = path.join(__dirname, '../routes');
+    export const routingPath = path.join(__dirname, './routes');
 
     export const routingDirectory = requireDir(routingPath);
 

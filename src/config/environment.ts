@@ -12,7 +12,7 @@ export namespace Environment {
 
     level: process.env.LOG_LEVEL || 'silly',
 
-    request: process.env.LOG_REQUEST || false,
+    listener: process.env.LOG_LISTENER || false,
 
   };
 

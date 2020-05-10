@@ -1,7 +1,7 @@
 import express from 'express';
-import Environment from './app/environment';
-import Configurator from './app/configurator';
-import Logger from './app/logger';
+import Environment from './environment';
+import Configurator from './configurator';
+import logger from '../helpers/logger.helper';
 
 export class Server {
 
@@ -14,11 +14,14 @@ export class Server {
     public start(): void {
 
         const app = this._app;
+
         const port = Environment.api.port;
         const prefix = Environment.api.prefix;
 
-        Configurator.run(app, prefix);
-        Configurator.listen(app, port);
+        const configurator = new Configurator();
+
+        configurator.run(app, prefix);
+        configurator.listen(app, port);
 
     }
 
@@ -27,7 +30,7 @@ export class Server {
         const port = Environment.api.port;
         const prefix = Environment.api.prefix;
 
-        Logger.info(`# Running on ${prefix}, port ${port}`);
+        logger.info(`# Running on ${prefix}, port ${port}`);
 
     }
 

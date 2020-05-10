@@ -1,6 +1,5 @@
 import { Router, Request, Response } from 'express';
 import StatusService from '../../services/status.service';
-import Logger from '../app/logger';
 
 export function route(router: Router): void {
 

@@ -1,21 +1,21 @@
 import { Request, Response, NextFunction } from 'express';
-import Environment from '../../app/environment';
-import Logger from '../../app/logger';
+import Environment from '../config/environment';
+import logger from '../helpers/logger.helper';
 
-export function sniffer(req: Request, res: Response, next: NextFunction): void {
+export function routerListener(req: Request, res: Response, next: NextFunction): void {
 
-    if (Environment.log.request) {
+    if (Environment.log.listener) {
 
         const requestStart = Date.now();
 
-        Logger.info(`# body: ${JSON.stringify(req.body)}`);
-        Logger.info(`# query: ${JSON.stringify(req.query)}`);
-        Logger.info(`# params: ${JSON.stringify(req.params)}`);
+        logger.info(`# body: ${JSON.stringify(req.body)}`);
+        logger.info(`# query: ${JSON.stringify(req.query)}`);
+        logger.info(`# params: ${JSON.stringify(req.params)}`);
 
-        res.on("error", error => Logger.error(error));
+        res.on("error", error => logger.error(error));
 
         res.on("data", () => {
-            Logger.log({
+            logger.log({
                 address: req.socket.remoteAddress,
                 family: req.socket.remoteFamily,
                 headers: req.rawHeaders,
@@ -28,7 +28,7 @@ export function sniffer(req: Request, res: Response, next: NextFunction): void {
         res.on("finish", () => {
             const requestEnd = Date.now();
             const processingTime = requestEnd - requestStart;
-            Logger.log({ requestStart, requestEnd, processingTime });
+            logger.log({ requestStart, requestEnd, processingTime });
         });
 
     }
@@ -37,4 +37,4 @@ export function sniffer(req: Request, res: Response, next: NextFunction): void {
 
 }
 
-export default sniffer;
+export default routerListener;

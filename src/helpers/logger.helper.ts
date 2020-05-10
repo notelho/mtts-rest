@@ -1,39 +1,14 @@
-import Environment from './environment';
+import Environment from '../config/environment';
 import winston from 'winston';
 import path from 'path';
 
-export namespace Logger {
+export const logger = new class Logger {
 
-  export type LoggerType = 'info' | 'debug' | 'warn' | 'error' | 'silly';
+  readonly types: string[] = ['info', 'debug', 'warn', 'error', 'silly'];
 
-  export function info(message: any): void {
-    Instance.info(stringfy(message));
-  }
+  readonly instance: winston.Logger;
 
-  export function debug(message: any): void {
-    Instance.debug(stringfy(message));
-  }
-
-  export function warn(message: any): void {
-    Instance.warn(stringfy(message));
-  }
-
-  export function error(message: any): void {
-    Instance.error(stringfy(message));
-  }
-
-  export function log(message: any): void {
-    Instance.silly(stringfy(message));
-  }
-
-  export function stringfy(message: any) {
-    if (typeof message !== 'string') {
-      return JSON.stringify(message);
-    }
-    return message as string;
-  }
-
-  export const Instance = (function () {
+  constructor() {
 
     const formater = winston.format.combine(
       winston.format.cli(),
@@ -52,7 +27,7 @@ export namespace Logger {
       return 'null';
     };
 
-    return winston.createLogger({
+    this.instance = winston.createLogger({
 
       level: Environment.log.level,
       levels: winston.config.npm.levels,
@@ -74,8 +49,35 @@ export namespace Logger {
 
     });
 
-  })();
+  }
+
+  public info(message: any): void {
+    this.instance.info(this.stringfy(message));
+  }
+
+  public debug(message: any): void {
+    this.instance.debug(this.stringfy(message));
+  }
+
+  public warn(message: any): void {
+    this.instance.warn(this.stringfy(message));
+  }
+
+  public error(message: any): void {
+    this.instance.error(this.stringfy(message));
+  }
+
+  public log(message: any): void {
+    this.instance.silly(this.stringfy(message));
+  }
+
+  public stringfy(message: any) {
+    if (typeof message !== 'string') {
+      return JSON.stringify(message);
+    }
+    return message as string;
+  }
 
 }
 
-export default Logger;
+export default logger;
