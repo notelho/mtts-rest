@@ -1,4 +1,63 @@
-.history
-dist
-node_modules
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# env
 .env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+/lib
+/esm
+/umd
+.git_bkp
+*.tgz
+
+# dependencies
+node_modules/
+jspm_packages/
+/www/node_modules/
+/lib
+
+# profiling files
+chrome-profiler-events.json
+speed-measure-plugin.json
+
+# IDEs and editors
+/.idea
+/.vscode
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.history
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+.history
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db

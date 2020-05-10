@@ -15,6 +15,7 @@ export namespace Configurator {
     app.use(bodyParser.urlencoded({ extended: true }));
 
     app.use(middlewares.sniffer);
+    app.use(middlewares.authentication);
 
     app.use('/public', express.static('src/public'));
 

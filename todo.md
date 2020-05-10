@@ -1,6 +1,7 @@
 docker container
 jest tests
 test prod run with pm2
+fix dependencies
 
 "start": "npm run build && npm run api",
 "api": "pm2 start dist/index.js --watch --name mining-backend",

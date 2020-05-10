@@ -9,7 +9,7 @@
     "build": "ts-node src/scripts/build.ts",
     "build-linux": "rm -rf dist/ && tsc && gulp minify",
     "build-windows": "rd /s /q dist && tsc && gulp minify",
-    "watch": "nodemon -e ts -w ./src -x npm run watch:serve",
+    "watch": "npx nodemon -e ts -w ./src -x npm run watch:serve",
     "watch:serve": "npx ts-node src/app.ts"
   },
   "keywords": [],

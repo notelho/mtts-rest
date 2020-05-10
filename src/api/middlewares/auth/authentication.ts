@@ -1,44 +1,28 @@
 import { Request, Response, NextFunction } from 'express';
 import HttpErrorType from "../../../types/http-error.type";
-import jwt from 'jsonwebtoken';
+import Authenticator from '../../app/authenticator';
 
 export function authentication(req: Request, res: Response, next: NextFunction): void {
 
   try {
 
-    const bearer = req.headers.authorization;
+    const bearer = req.headers.authorization || '';
 
-    if (!bearer) {
-      throw new Error();
-    }
+    const token = Authenticator.getToken(bearer);
 
-    const token = bearer.split(' ')[1];
-
-    const isValid = (function (token: string): boolean {
-
-      //     const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
-      //     const userId = decodedToken.userId;
-
-      return true;
-
-    })(token);
+    const isValid = Authenticator.isValid(token);
 
     if (!isValid) {
-
-      throw new Error('Invalid ')
-
+      throw new Error('Invalid token');
     }
 
+    next();
 
   } catch (error) {
 
-    //     res.status(401).json({
-    //       error: new Error('Invalid request!')
-    //     });
+    next({ status: 401, name: 'Auth failed', message: error.message } as HttpErrorType);
 
   }
-
-  // next({ status: 404, name: 'Not Found', message: 'Not Found' } as HttpErrorType);
 
 }
 
