@@ -12,15 +12,15 @@ export namespace Router {
 
     export function router() {
 
-        const router = express.Router();
+        const routing = express.Router();
 
         const routes = routingNames.map(key => routingDirectory[key]);
 
         routes.forEach(route => {
-            route.default(router);
+            route.default(routing);
         });
 
-        return router;
+        return routing;
     }
 
 }

@@ -12,9 +12,9 @@ export function authenticator(req: Request, res: Response, next: NextFunction): 
             throw new Error('Authorization not found');
         }
 
-        const authenticator = new Authenticator(bearer);
+        const validator = new Authenticator(bearer);
 
-        if (!authenticator.valid) {
+        if (!validator.valid) {
 
             throw new Error('Invalid user provided');
 

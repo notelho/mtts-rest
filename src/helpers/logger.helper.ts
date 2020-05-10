@@ -20,7 +20,7 @@ export const logger = new (class Logger {
         const devConsole = new winston.transports.Console({ format: formater });
         const prodConsole = new winston.transports.Console();
 
-        const getFileName = function () {
+        const getFileName = () => {
             if (process.mainModule) {
                 return path.basename(process.mainModule.filename);
             }
