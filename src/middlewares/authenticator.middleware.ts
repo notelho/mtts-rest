@@ -4,29 +4,29 @@ import HttpError from '../models/http-error.model';
 
 export function authenticator(req: Request, res: Response, next: NextFunction): void {
 
-  try {
+    try {
 
-    const bearer = req.headers.authorization || '';
+        const bearer = req.headers.authorization || '';
 
-    if (!bearer) {
-      throw new Error('Authorization not found');
+        if (!bearer) {
+            throw new Error('Authorization not found');
+        }
+
+        const authenticator = new Authenticator(bearer);
+
+        if (!authenticator.valid) {
+
+            throw new Error('Invalid user provided');
+
+        }
+
+        next();
+
+    } catch (error) {
+
+        next(new HttpError(401, 'Auth failed', error.message));
+
     }
-
-    const authenticator = new Authenticator(bearer);
-
-    if (!authenticator.valid) {
-
-      throw new Error('Invalid user provided');
-
-    }
-
-    next();
-
-  } catch (error) {
-
-    next(new HttpError(401, 'Auth failed', error.message));
-
-  }
 
 }
 

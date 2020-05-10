@@ -4,7 +4,7 @@ export class Status {
 
     readonly error: number = 500;
 
-    constructor() { }
+    // constructor() { }
 
 }
 

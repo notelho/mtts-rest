@@ -11,36 +11,34 @@ import errorThrower from '../middlewares/error-thrower.middleware';
 
 export class Configurator {
 
-  constructor() { }
+    public run(app: express.Application, prefix: string): void {
+        app.enable('trust proxy');
+        app.use(cors({ allowedHeaders: '*' }));
+        app.use(bodyParser.json());
+        app.use(bodyParser.urlencoded({ extended: true }));
+        app.use(routerListener);
+        app.use(authenticator);
+        app.use('/public', express.static('src/public'));
+        app.use(prefix, Router.router());
+        app.use(errorHandler);
+        app.use(errorNotFound);
+        app.use(errorThrower);
+    }
 
-  public run(app: express.Application, prefix: string): void {
-    app.enable('trust proxy');
-    app.use(cors({ allowedHeaders: '*' }));
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(routerListener);
-    app.use(authenticator);
-    app.use('/public', express.static('src/public'));
-    app.use(prefix, Router.router());
-    app.use(errorHandler);
-    app.use(errorNotFound);
-    app.use(errorThrower);
-  }
+    public listen(app: express.Application, port: number): void {
+        app.listen(port, (error?: any) => {
+            if (error) {
+                this.handler(error);
+            }
+        });
+    }
 
-  public listen(app: express.Application, port: number): void {
-    app.listen(port, (error?: any) => {
-      if (error) {
-        this.handler(error);
-      }
-    });
-  }
-
-  public handler(error: any): never {
-    logger.error(error);
-    logger.error('# An error happened,');
-    logger.error('# process will exit now');
-    process.exit(1);
-  }
+    public handler(error: any): never {
+        logger.error(error);
+        logger.error('# An error happened,');
+        logger.error('# process will exit now');
+        process.exit(1);
+    }
 
 }
 

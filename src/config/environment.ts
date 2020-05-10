@@ -4,25 +4,25 @@ dotenv.config();
 
 export namespace Environment {
 
-  export const env = process.env.NODE_ENV || 'development';
+    export const env = process.env.NODE_ENV || 'development';
 
-  export const jwt = { secret: process.env.JWT_SECRET || 'supersecretapikey' };
+    export const jwt = { secret: process.env.JWT_SECRET || 'supersecretapikey' };
 
-  export const log = {
+    export const log = {
 
-    level: process.env.LOG_LEVEL || 'silly',
+        level: process.env.LOG_LEVEL || 'silly',
 
-    listener: process.env.LOG_LISTENER || false,
+        listener: process.env.LOG_LISTENER || false,
 
-  };
+    };
 
-  export const api = {
+    export const api = {
 
-    port: process.env.API_PORT ? parseInt(process.env.API_PORT) : 3000,
+        port: process.env.API_PORT ? parseInt(process.env.API_PORT) : 3000,
 
-    prefix: process.env.API_PREFIX || '/api',
+        prefix: process.env.API_PREFIX || '/api',
 
-  };
+    };
 
 }
 

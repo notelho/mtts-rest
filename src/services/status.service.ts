@@ -4,7 +4,7 @@ export class StatusService {
 
     private _status = new Status();
 
-    constructor() { }
+    // constructor() { }
 
     public get ok(): number {
         return this._status.ok;
