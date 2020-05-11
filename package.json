@@ -5,17 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && npm run api",
-    "api": "pm2 start dist/index.js --watch --name mtts-rest",
-    "build": "ts-node src/scripts/build.ts",
-    "build-linux": "rm -rf dist/ && tsc && gulp minify",
-    "build-windows": "rd /s /q dist && tsc && gulp minify",
+    "api": "npx pm2 start dist/app.js --name mtts-rest",
+    "build": "gulp clean && tsc && gulp minify",
     "watch": "npx nodemon -e ts -w ./src -x npm run watch:serve",
     "watch:serve": "npx ts-node src/app.ts",
     "commit": "npx git-cz",
     "test": "exit 0"
   },
   "keywords": [],
-  "author": "",
+  "author": "Nathan Botelho <nimbotelho@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "body-parser": "1.19.0",
