@@ -1,4 +1,4 @@
-import Environment from '../config/environment';
+import environment from '../config/environment';
 import winston from 'winston';
 import path from 'path';
 
@@ -29,12 +29,12 @@ export const logger = new (class Logger {
 
         this.instance = winston.createLogger({
 
-            level: Environment.log.level,
+            level: environment.log.level,
             levels: winston.config.npm.levels,
 
             // exitOnError: false,
 
-            transports: Environment.env === 'development' ?
+            transports: environment.env === 'development' ?
                 [devConsole] :
                 [prodConsole],
 

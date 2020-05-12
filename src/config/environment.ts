@@ -1,29 +1,43 @@
 import dotenv from 'dotenv';
 
-dotenv.config();
+export const environment = new (class Environment {
 
-export namespace Environment {
+    public readonly env: string;
 
-    export const env = process.env.NODE_ENV || 'development';
+    public readonly jwt: { secret: string };
 
-    export const jwt = { secret: process.env.JWT_SECRET || 'supersecretapikey' };
+    public readonly log: { level: string, listener: boolean };
 
-    export const log = {
+    public readonly api: { port: number, prefix: string, public: string };
 
-        level: process.env.LOG_LEVEL || 'silly',
+    constructor() {
 
-        listener: process.env.LOG_LISTENER || false,
+        dotenv.config();
 
-    };
+        this.env = process.env.NODE_ENV || 'development';
 
-    export const api = {
+        this.jwt = { secret: process.env.JWT_SECRET || 'supersecretapikey' };
 
-        port: process.env.API_PORT ? parseInt(process.env.API_PORT, 10) : 3000,
+        this.log = {
 
-        prefix: process.env.API_PREFIX || '/api',
+            level: process.env.LOG_LEVEL || 'silly',
 
-    };
+            listener: (process.env.LOG_LISTENER === 'true') || false,
 
-}
+        };
 
-export default Environment;
+        this.api = {
+
+            port: process.env.API_PORT ? parseInt(process.env.API_PORT, 10) : 3000,
+
+            prefix: process.env.API_PREFIX || '/api',
+
+            public: process.env.API_PUBLIC || '/public',
+
+        };
+
+    }
+
+})();
+
+export default environment;

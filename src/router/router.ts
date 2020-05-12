@@ -2,19 +2,25 @@ import requireDir from 'require-dir';
 import express from 'express';
 import path from 'path';
 
-export namespace Router {
+export class Router {
 
-    export const routingPath = path.join(__dirname, './routes');
+    public readonly routingPath: string;
 
-    export const routingDirectory = requireDir(routingPath);
+    public readonly routingDirectory: any;
 
-    export const routingNames = Object.keys(routingDirectory);
+    public readonly routingNames: string[];
 
-    export function router() {
+    constructor() {
+        this.routingPath = path.join(__dirname, './routes');
+        this.routingDirectory = requireDir(this.routingPath);
+        this.routingNames = Object.keys(this.routingDirectory);
+    }
+
+    public get routes() {
 
         const routing = express.Router();
 
-        const routes = routingNames.map(key => routingDirectory[key]);
+        const routes = this.routingNames.map(key => this.routingDirectory[key]);
 
         routes.forEach(route => {
             route.default(routing);

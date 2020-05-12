@@ -1,5 +1,5 @@
 import UserData from '../interfaces/user-data.interface';
-import Environment from './environment';
+import environment from './environment';
 import jwt from 'jsonwebtoken';
 
 export class Authenticator {
@@ -37,7 +37,7 @@ export class Authenticator {
 
             token = bearer.split(' ')[1];
 
-            userData = jwt.verify(token, Environment.jwt.secret) as UserData; // TEMP
+            userData = jwt.verify(token, environment.jwt.secret) as UserData; // TEMP
 
             isValid = userData.id === 1; // TEMP
 

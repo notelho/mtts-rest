@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
-import Environment from '../config/environment';
+import environment from '../config/environment';
 import logger from '../helpers/logger.helper';
 
 export function routerListener(req: Request, res: Response, next: NextFunction): void {
 
-    if (Environment.log.listener) {
+    if (environment.log.listener) {
 
         const requestStart = Date.now();
 

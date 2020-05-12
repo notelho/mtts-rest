@@ -11,15 +11,15 @@ import errorThrower from '../middlewares/error-thrower.middleware';
 
 export class Configurator {
 
-    public run(app: express.Application, prefix: string): void {
+    public run(app: express.Application, apiPrefix: string, publicPrefix: string): void {
         app.enable('trust proxy');
         app.use(cors({ allowedHeaders: '*' }));
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended: true }));
         app.use(routerListener);
         app.use(authenticator);
-        app.use('/public', express.static('src/public'));
-        app.use(prefix, Router.router());
+        app.use(publicPrefix, express.static('src/public'));
+        app.use(apiPrefix, new Router().routes);
         app.use(errorHandler);
         app.use(errorNotFound);
         app.use(errorThrower);

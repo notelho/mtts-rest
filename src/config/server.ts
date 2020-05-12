@@ -1,5 +1,5 @@
 import express from 'express';
-import Environment from './environment';
+import environment from './environment';
 import Configurator from './configurator';
 import logger from '../helpers/logger.helper';
 
@@ -15,22 +15,23 @@ export class Server {
 
         const app = this._app;
 
-        const port = Environment.api.port;
-        const prefix = Environment.api.prefix;
+        const port = environment.api.port;
+        const apiPrefix = environment.api.prefix;
+        const publicPrefix = environment.api.public;
 
         const configurator = new Configurator();
 
-        configurator.run(app, prefix);
+        configurator.run(app, apiPrefix, publicPrefix);
         configurator.listen(app, port);
 
     }
 
     public info(): void {
 
-        const port = Environment.api.port;
-        const prefix = Environment.api.prefix;
+        const port = environment.api.port;
+        const apiPrefix = environment.api.prefix;
 
-        logger.info(`# Running on ${prefix}, port ${port}`);
+        logger.info(`# Running on ${apiPrefix}, port ${port}`);
 
     }
 
