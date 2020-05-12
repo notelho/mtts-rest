@@ -12,6 +12,10 @@ gulp.task('minify', function () {
 
 gulp.task('clean', function () {
     return gulp.src('dist/', { read: false })
-        // .pipe(gulp.dest('dist'))
         .pipe(clean());
+});
+
+gulp.task('public', function () {
+    return gulp.src('public/**/*.*')
+        .pipe(gulp.dest('dist/public'));
 });

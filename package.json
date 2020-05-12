@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run build && npm run api",
     "api": "npx pm2 start dist/app.js --name mtts-rest",
-    "build": "gulp clean && tsc && gulp minify",
+    "build": "gulp clean && tsc && gulp minify && gulp public",
     "watch": "npx nodemon -e ts -w ./src -x npm run watch:serve",
     "watch:serve": "npx ts-node src/app.ts",
     "commit": "npx git-cz",

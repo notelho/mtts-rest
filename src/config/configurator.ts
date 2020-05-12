@@ -18,7 +18,7 @@ export class Configurator {
         app.use(bodyParser.urlencoded({ extended: true }));
         app.use(routerListener);
         app.use(authenticator);
-        app.use(publicPrefix, express.static('src/public'));
+        app.use(publicPrefix, express.static('public'));
         app.use(apiPrefix, new Router().routes);
         app.use(errorHandler);
         app.use(errorNotFound);
