@@ -11,7 +11,7 @@ gulp.task('minify', function () {
 });
 
 gulp.task('clean', function () {
-    return gulp.src('dist/', { read: false })
+    return gulp.src('dist/', { allowEmpty: true })
         .pipe(clean());
 });
 
