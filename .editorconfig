@@ -12,9 +12,15 @@ insert_final_newline = true
 [*.md]
 trim_trailing_whitespace = false
 
-[{package.json,.travis.yml}]
+[{.*rc,*.yml,*.md,*.json,*.yaml}]
 indent_style = space
+
+[{*.svg}]
+indent_style = tab
+indent_size = 1
+
+[{*.json,.*.md}]
 indent_size = 2
 
-[{.*rc,*.yml,*.md,*.json,*.svg}]
-indent_style = space
+[{.*rc,*.yml,*.yaml}]
+indent_size = 4
