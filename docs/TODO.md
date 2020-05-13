@@ -1,2 +1,4 @@
 rusky check build
-docker file
+
+test docker commands
+
