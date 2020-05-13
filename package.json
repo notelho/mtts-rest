@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && npm run api",
+    "stop": "npx pm2 stop mtts-rest",
     "api": "npx pm2 start dist/app.js --name mtts-rest",
-    "build": "gulp clean && tsc && gulp minify && gulp public",
-    "watch": "npx nodemon -e ts -w ./src -x npm run watch:serve",
-    "watch:serve": "npx ts-node src/app.ts",
+    "build": "npx gulp clean && tsc && npx gulp minify && npx gulp public",
+    "watch": "npx nodemon -e ts -w ./src -x npm run serve",
+    "serve": "npx ts-node src/app.ts",
     "commit": "npx git-cz",
     "test": "exit 0"
   },
