@@ -27,17 +27,17 @@ export class Configurator {
 
     public listen(app: express.Application, port: number): void {
         app.listen(port, (error?: any) => {
-            if (error) {
-                this.handler(error);
-            }
+            this.handler(error);
         });
     }
 
-    public handler(error: any): never {
-        logger.error(error);
-        logger.error('# An error happened,');
-        logger.error('# process will exit now');
-        process.exit(1);
+    public handler(error: any): void | never {
+        if (error) {
+            logger.error(error);
+            logger.error('# An error happened,');
+            logger.error('# process will exit now');
+            process.exit(1);
+        }
     }
 
 }
