@@ -1,1 +1,1 @@
-rusky check build
+finish readme
